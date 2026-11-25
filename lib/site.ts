@@ -1,10 +1,12 @@
+const phoneNumber = "11975006171";
+
 export const site = {
   name: "Brava Desentupidora SP",
   shortName: "Brava Desentupidora",
   domain: process.env.SITE_URL || "https://desentupidorabrava24h.com.br",
-  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY || "(11) 99999-0000",
-  phone: process.env.NEXT_PUBLIC_PHONE || "+5511999990000",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "5511999990000",
+  phoneDisplay: `(${phoneNumber.slice(0, 2)}) ${phoneNumber.slice(2, -4)}-${phoneNumber.slice(-4)}`,
+  phone: `+55${phoneNumber}`,
+  whatsapp: `55${phoneNumber}`,
   city: "São Paulo",
   state: "SP",
   hours: "24 horas",

@@ -16,14 +16,11 @@ Site institucional e de SEO local em Next.js, preparado para publicação na Ver
 
 ## Configuração antes da publicação
 
-Os números atuais são simulados, conforme autorizado para a construção inicial. Configure na Vercel:
+O número de atendimento para ligações e WhatsApp é definido em `lib/site.ts`. Configure o domínio e a indexação na Vercel:
 
 ```env
 SITE_URL=https://desentupidorabrava24h.com.br
 SITE_INDEXING=true
-NEXT_PUBLIC_PHONE_DISPLAY=(11) 00000-0000
-NEXT_PUBLIC_PHONE=+5511000000000
-NEXT_PUBLIC_WHATSAPP=5511000000000
 ```
 
 ## Desenvolvimento
