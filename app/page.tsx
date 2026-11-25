@@ -4,8 +4,12 @@ import {JsonLd} from "@/components/JsonLd";
 import {pageSchema} from "@/lib/schema";
 import {homeFaq, homeRelatedPages} from "@/data/pages";
 
+import {PageShell} from "@/components/PageShell";
+import {contactMessage} from "@/lib/whatsapp-contact";
+
 export default function Home(){
-  return <>
+  const message = contactMessage();
+  return <PageShell message={message}>
     <JsonLd data={pageSchema()}/>
     <main id="conteudo">
       <section className="hero">
@@ -15,7 +19,7 @@ export default function Home(){
           <span className="eyebrow light">SÃO PAULO • ATENDIMENTO 24 HORAS</span>
           <h1>Brava Desentupidora 24 horas em São Paulo</h1>
           <p><strong>Pia, vaso, ralo ou esgoto entupido?</strong> Conte o que aconteceu pelo WhatsApp ou por telefone. A Brava vai até o seu endereço em São Paulo, avalia o problema e passa o orçamento antes de começar.</p>
-          <CTAs location="São Paulo"/>
+          <CTAs message={message}/>
           <div className="hero-badges">
             <span>✓ Atendimento 24h</span>
             <span>✓ Visita gratuita</span>
@@ -24,7 +28,7 @@ export default function Home(){
           </div>
         </div>
       </section>
-      <EmergencyBar/>
+      <EmergencyBar message={contactMessage(undefined, true)}/>
 
       <section className="section"><div className="container">
         <div className="section-head"><h2>O que está entupido?</h2><p>Veja como a Brava atende cada tipo de entupimento em São Paulo, da pia da cozinha à rede de esgoto.</p></div>
@@ -41,7 +45,7 @@ export default function Home(){
             <li><b>Combine a visita</b><span>A equipe confirma a disponibilidade, informa a previsão de chegada e orienta você sobre os próximos passos.</span></li>
             <li><b>Confira o orçamento</b><span>O técnico avalia o problema no local e explica o serviço. A execução começa depois da sua aprovação.</span></li>
           </ol>
-          <CTAs location="São Paulo"/>
+          <CTAs message={message}/>
         </div>
       </div></section>
 
@@ -61,7 +65,7 @@ export default function Home(){
 
       <section className="section"><div className="container faq-home"><div className="section-head"><h2>Perguntas frequentes sobre a Brava Desentupidora</h2></div><FAQList items={homeFaq}/></div></section>
 
-      <section className="section cta-section"><div className="container"><h2>Precisa de uma desentupidora agora?</h2><p>Se a água estiver voltando pelo ralo ou o vaso estiver transbordando, avise logo no primeiro contato.</p><CTAs location="São Paulo"/><Related paths={homeRelatedPages}/></div></section>
+      <section className="section cta-section"><div className="container"><h2>Precisa de uma desentupidora agora?</h2><p>Se a água estiver voltando pelo ralo ou o vaso estiver transbordando, avise logo no primeiro contato.</p><CTAs message={message}/><Related paths={homeRelatedPages}/></div></section>
     </main>
-  </>;
+  </PageShell>;
 }
