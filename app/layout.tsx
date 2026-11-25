@@ -2,6 +2,7 @@ import type {Metadata,Viewport} from "next";
 import "./globals.css";
 import {Footer,Header} from "@/components/Site";
 import {BudgetForm} from "@/components/BudgetForm";
+import {CustomerReviews} from "@/components/CustomerReviews";
 import {absoluteUrl,site} from "@/lib/site";
 
 export const metadata:Metadata={
@@ -13,7 +14,20 @@ export const metadata:Metadata={
   openGraph:{siteName:site.name,locale:"pt_BR",type:"website"},
   icons:{icon:"/favicon.svg"}
 };
-export const viewport:Viewport={width:"device-width",initialScale:1,themeColor:"#075ea8"};
+export const viewport:Viewport={width:"device-width",initialScale:1,themeColor:"#003b78"};
 
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="pt-BR"><body><a className="skip" href="#conteudo">Ir para o conteúdo</a><Header/>{children}<BudgetForm/><Footer/></body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){
+  return (
+    <html lang="pt-BR">
+      <body>
+        <a className="skip" href="#conteudo">Ir para o conteúdo</a>
+        <Header/>
+        {children}
+        <CustomerReviews/>
+        <BudgetForm/>
+        <Footer/>
+      </body>
+    </html>
+  );
+}
 
