@@ -1,0 +1,27 @@
+import Link from "next/link";
+import {images} from "@/data/images";
+import {allPages,locationPages,priorityLocations,servicePages,type FAQ,type PageData} from "@/data/pages";
+import {site,whatsappUrl} from "@/lib/site";
+
+export function Logo(){return <Link className="logo" href="/" aria-label="Brava Desentupidora - início"><span className="logo-mark">B</span><span><strong>BRAVA</strong><small>DESENTUPIDORA SP</small></span></Link>}
+
+export function Header(){return <header className="header"><div className="topline"><div className="container top-inner"><span>Atendimento 24 horas</span><span>Visita gratuita</span><a href={`tel:${site.phone}`}>Ligue: {site.phoneDisplay}</a></div></div><div className="container nav"><Logo/><nav className="desktop-nav" aria-label="Principal"><Link href="/servicos/">Serviços</Link><Link href="/areas-atendidas/">Áreas atendidas</Link><Link href="/blog/">Guia</Link><Link href="/sobre/">Sobre</Link></nav><div className="nav-actions"><a className="call-link" href={`tel:${site.phone}`}>Ligar agora</a><a className="button small" href={whatsappUrl()} target="_blank" rel="noopener noreferrer">WhatsApp</a></div><details className="mobile-menu"><summary>Menu</summary><div><Link href="/servicos/">Serviços</Link><Link href="/areas-atendidas/">Áreas atendidas</Link><Link href="/blog/">Guia</Link><Link href="/sobre/">Sobre</Link><a href={`tel:${site.phone}`}>Ligar agora</a></div></details></div></header>}
+
+export function Footer(){return <footer className="footer"><div className="container footer-grid"><div><Logo/><p>Desentupimento 24 horas em São Paulo e Grande SP. Visita gratuita e orçamento antes da execução.</p></div><div><h2>Atendimento</h2><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a><a href={whatsappUrl()} target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a><Link href="/contato/">Informações de contato</Link></div><div><h2>Informações</h2><Link href="/areas-atendidas/">Áreas atendidas</Link><Link href="/politica-de-privacidade/">Política de privacidade</Link><Link href="/termos-de-uso/">Termos de uso</Link><Link href="/creditos-de-imagens/">Créditos das imagens</Link></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Brava Desentupidora SP</span><span>Site desenvolvido por Mídia & Marketing Digital</span></div></footer>}
+
+export function CTAs({location,compact=false}:{location?:string;compact?:boolean}){const place=location?` em ${location}`:"";return <div className={`ctas ${compact?"compact":""}`}><a className="button" href={whatsappUrl(`Olá! Preciso de atendimento de desentupidora${place}. Pode me ajudar?`)} target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a><a className="button secondary" href={`tel:${site.phone}`}>Ligar {site.phoneDisplay}</a></div>}
+
+export function Photo({name,className=""}:{name:keyof typeof images;className?:string}){const photo=images[name];return <figure className={`photo ${className}`}><img src={photo.src} alt={photo.alt} loading={name==="hero"?"eager":"lazy"}/><figcaption>Imagem ilustrativa. <a href={photo.source} target="_blank" rel="noopener noreferrer">Crédito</a></figcaption></figure>}
+
+export function ServiceGrid({limit}:{limit?:number}){const items=limit?servicePages.slice(0,limit):servicePages;return <div className="card-grid">{items.map((p,i)=><Link className="service-card" href={p.path} key={p.path}><img src={images[p.image].src} alt={images[p.image].alt} loading="lazy"/><div><span>0{i+1}</span><h3>{p.h1.replace(" em São Paulo","")}</h3><p>{p.description.split(".")[0]}.</p><b>Conhecer serviço →</b></div></Link>)}</div>}
+
+export function LocationLinks({all=false}:{all?:boolean}){const items=all?locationPages:priorityLocations;return <div className="pills">{items.map(p=><Link href={p.path} key={p.path}>{p.location}</Link>)}</div>}
+
+export function FAQList({items}:{items:FAQ[]}){return <div className="faq">{items.map(item=><details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div>}
+
+export function TrustSection(){return <section className="section pale"><div className="container"><div className="section-head"><span className="eyebrow">ATENDIMENTO COM CLAREZA</span><h2>Confiança começa antes do serviço</h2><p>Esta área está preparada para receber avaliações reais dos clientes da Brava. Enquanto os depoimentos são reunidos, apresentamos os compromissos informados pela empresa.</p></div><div className="trust-grid"><article><strong>24h</strong><h3>Atendimento todos os dias</h3><p>Solicitações durante o dia, à noite, domingos e feriados.</p></article><article><strong>R$ 0</strong><h3>Visita gratuita</h3><p>Avaliação inicial e orçamento antes de executar o serviço.</p></article><article><strong>2 canais</strong><h3>WhatsApp e ligação</h3><p>Escolha a forma mais rápida e confortável para explicar o problema.</p></article></div></div></section>}
+
+export function Related({paths=[]}:{paths?:string[]}){const pages=paths.map(path=>allPages.find(p=>p.path===path)).filter(Boolean) as PageData[];if(!pages.length)return null;return <aside className="related"><h2>Veja também</h2><div>{pages.slice(0,12).map(p=><Link href={p.path} key={p.path}>{p.h1}</Link>)}</div></aside>}
+
+export function EmergencyBar(){return <div className="emergency"><div><strong>Problema urgente?</strong><span>Atendimento 24 horas em São Paulo e Grande SP</span></div><CTAs compact/></div>}
+
