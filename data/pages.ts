@@ -105,20 +105,21 @@ export const saoBernardoNeighborhoodPages:PageData[] = saoBernardoNeighborhoods.
 export const allLocationPages:PageData[] = [...locationPages,...santoAndreNeighborhoodPages,...saoBernardoNeighborhoodPages];
 
 const serviceSeed = [
-  ["desentupimento-de-pia","Desentupimento de pia","pia de cozinha ou banheiro","sink"],
-  ["desentupimento-de-vaso-sanitario","Desentupimento de vaso sanitário","vaso sanitário com escoamento lento, transbordamento ou retorno","kitchen"],
-  ["desentupimento-de-ralo","Desentupimento de ralo","ralos de banheiro, quintal e área de serviço","drain"],
-  ["desentupimento-de-esgoto","Desentupimento de esgoto","rede de esgoto com retorno, mau cheiro ou extravasamento","night"],
-  ["desentupimento-de-caixa-de-gordura","Desentupimento de caixa de gordura","caixa de gordura com acúmulo, retorno ou transbordamento","pipe"],
-  ["desentupimento-residencial","Desentupimento residencial","casas e apartamentos","kitchen"],
-  ["desentupimento-comercial-industrial","Desentupimento comercial e industrial","comércios, restaurantes, condomínios, galpões e indústrias","night"]
+  ["desentupimento-de-pia","Desentupimento de pia","pia de cozinha ou banheiro","sink","A água fica parada na cuba ou demora a descer? A equipe verifica o sifão e a tubulação para localizar o bloqueio."],
+  ["desentupimento-de-vaso-sanitario","Desentupimento de vaso sanitário","vaso sanitário com escoamento lento, transbordamento ou retorno","kitchen","A água sobe quando você dá descarga ou fica parada no vaso? Avise a equipe se houver risco de transbordamento."],
+  ["desentupimento-de-ralo","Desentupimento de ralo","ralos de banheiro, quintal e área de serviço","drain","O ralo do banheiro, do quintal ou da área de serviço deixou de escoar? Informe se há mau cheiro ou água voltando."],
+  ["desentupimento-de-esgoto","Desentupimento de esgoto","rede de esgoto com retorno, mau cheiro ou extravasamento","night","Esgoto voltando pelo ralo ou vários pontos entupidos ao mesmo tempo? A equipe avalia a tubulação no local."],
+  ["desentupimento-de-caixa-de-gordura","Desentupimento de caixa de gordura","caixa de gordura com acúmulo, retorno ou transbordamento","pipe","Mau cheiro na cozinha, pia demorando a escoar ou caixa transbordando? Conte quais sinais apareceram."],
+  ["desentupimento-residencial","Desentupimento residencial","casas e apartamentos","kitchen","Atendimento em casas e apartamentos. Diga qual ponto entupiu e se o problema também aparece em outros cômodos."],
+  ["desentupimento-comercial-industrial","Desentupimento comercial e industrial","comércios, restaurantes, condomínios, galpões e indústrias","night","Atendimento em lojas, restaurantes, escritórios e outros estabelecimentos. Informe se o entupimento interrompeu a operação."]
 ] as const;
 
-export const servicePages:PageData[] = serviceSeed.map(([slug,name,target,image])=>({
+export const servicePages = serviceSeed.map(([slug,name,,image,serviceSummary]):PageData & {serviceSummary:string}=>({
   path:`/${slug}/`,slug,kind:"service",title:`${name} 24h em São Paulo | Brava`,
   description:`${name} em São Paulo e Grande SP. Atendimento 24 horas, visita gratuita e orçamento antes do serviço. WhatsApp e telefone.`,
   h1:`${name} em São Paulo`,eyebrow:"SERVIÇO 24 HORAS",image,
-  intro:`Atendimento para ${target}, com avaliação do acesso e da situação antes da execução. Ligue ou envie uma mensagem para solicitar a visita gratuita.`,
+  serviceSummary,
+  intro:`${serviceSummary} Ligue ou mande uma mensagem para pedir a visita gratuita.`,
   sections:[
     {heading:`Quando solicitar ${name.toLowerCase()}`,text:`Procure ajuda quando houver escoamento lento, retorno de água, barulhos na tubulação, mau cheiro persistente ou risco de transbordamento. Evite insistir em produtos corrosivos sem saber a causa da obstrução.`},
     {heading:"Avaliação e equipamento adequado",text:"O profissional verifica o ponto afetado, as condições de acesso e os sinais apresentados. O método depende da tubulação e da extensão do bloqueio; por isso, o diagnóstico deve vir antes da execução."},
@@ -257,9 +258,9 @@ export const articlePages:PageData[] = articles.map((article,i)=>({
 }));
 
 export const institutionalPages:PageData[] = [
-  {path:"/servicos/",slug:"servicos",kind:"institutional",title:"Serviços de desentupimento em São Paulo | Brava",description:"Conheça os serviços da Brava para pia, vaso, ralo, esgoto, caixa de gordura, residências, comércios e condomínios.",h1:"Serviços de desentupimento",eyebrow:"SOLUÇÕES BRAVA",intro:"Atendimento 24 horas para diferentes pontos e tipos de imóvel, com visita gratuita e orçamento antes da execução.",image:"pipe",sections:[{heading:"Soluções conforme o ponto afetado",text:"Cada entupimento exige avaliação do acesso, da tubulação e dos sinais apresentados. Escolha o serviço abaixo ou fale com a equipe para explicar o problema."}],related:servicePages.map(p=>p.path)},
+  {path:"/servicos/",slug:"servicos",kind:"institutional",title:"Serviços de desentupimento em São Paulo | Brava",description:"Conheça os serviços da Brava para pia, vaso, ralo, esgoto, caixa de gordura, residências, comércios e condomínios.",h1:"Serviços de desentupimento em São Paulo",eyebrow:"ATENDIMENTO 24 HORAS",intro:"Da pia que demora a escoar ao esgoto que volta pelos ralos, a Brava vai ao seu endereço para avaliar o problema e passar o orçamento.",image:"pipe",sections:[{heading:"Escolha o que está entupido",text:"Veja os sinais mais comuns de cada problema e como pedir a visita. Se o entupimento aparece em mais de um ponto, avise a equipe no primeiro contato."}],related:servicePages.map(p=>p.path)},
   {path:"/areas-atendidas/",slug:"areas-atendidas",kind:"institutional",title:"Áreas atendidas pela Brava Desentupidora | SP",description:"Desentupidora na Zona Sul, ABC e cidades da Grande São Paulo. Consulte sua região e solicite atendimento.",h1:"Áreas atendidas em São Paulo e Grande SP",eyebrow:"ONDE ATENDEMOS",intro:"Consulte a página da sua região e solicite atendimento por WhatsApp ou ligação.",image:"drain",sections:[{heading:"Encontre atendimento na sua região",text:"A Brava atende bairros da Zona Sul, cidades do ABC e outros municípios da Grande São Paulo. Selecione uma localidade abaixo para consultar informações e serviços disponíveis."}],related:locationPages.map(p=>p.path)},
-  {path:"/sobre/",slug:"sobre",kind:"institutional",title:"Sobre a Brava Desentupidora SP",description:"Conheça a Brava Desentupidora SP, atendimento 24 horas para residências, comércios, condomínios e indústrias.",h1:"Sobre a Brava Desentupidora SP",eyebrow:"QUEM SOMOS",intro:"Atendimento técnico, comunicação clara e orçamento antes da execução.",image:"hero",sections:[{heading:"Atendimento para diferentes imóveis",text:"A Brava recebe solicitações residenciais, comerciais, condominiais e industriais em São Paulo e região metropolitana."},{heading:"Atendimento 24 horas",text:"Os canais funcionam durante o dia, à noite, aos domingos e feriados, conforme disponibilidade para cada endereço."},{heading:"Visita gratuita",text:"O local e o problema são avaliados antes da apresentação do orçamento. O serviço deve ser autorizado pelo cliente."}],related:["/servicos/","/areas-atendidas/","/contato/"]},
+  {path:"/sobre/",slug:"sobre",kind:"institutional",title:"Sobre a Brava Desentupidora SP",description:"Conheça a Brava Desentupidora SP, atendimento 24 horas para residências, comércios, condomínios e indústrias.",h1:"Quem é a Brava Desentupidora?",eyebrow:"QUEM SOMOS",intro:"A Brava vai até o seu endereço em São Paulo e região para avaliar o entupimento, explicar o que precisa ser feito e informar o valor do serviço.",image:"hero",sections:[{heading:"Da sua casa ao seu comércio",text:"Atendemos casas, apartamentos, condomínios, lojas, restaurantes e indústrias. Conte como o entupimento está afetando o local para a equipe orientar o atendimento."},{heading:"Pode chamar a qualquer hora",text:"Recebemos chamados durante o dia, à noite e em domingos e feriados. Informe o bairro para consultar a disponibilidade e a previsão de chegada."},{heading:"Você recebe o orçamento antes do serviço",text:"A visita inicial é gratuita. Depois de avaliar a tubulação, o técnico explica o que será feito e informa o valor para você decidir se quer seguir."}],related:["/servicos/","/areas-atendidas/","/contato/"]},
   {path:"/contato/",slug:"contato",kind:"institutional",title:"Telefone e WhatsApp da Brava Desentupidora",description:"Fale com a Brava Desentupidora por WhatsApp ou telefone. Atendimento 24 horas e visita gratuita.",h1:"Telefone e WhatsApp da Brava",eyebrow:"ATENDIMENTO 24H",intro:"Informe o endereço e explique o que está entupido para consultar atendimento e previsão.",image:"sink",sections:[{heading:"O que informar",text:"Envie o endereço, o tipo de imóvel, o ponto afetado e os sinais observados. Avise se existe retorno de esgoto, transbordamento ou risco de alagamento."},{heading:"Antes de autorizar",text:"Confirme o orçamento, o que está incluído e a forma de pagamento. A avaliação inicial é gratuita."}],related:["/servicos/","/areas-atendidas/"]},
   {path:"/blog/",slug:"blog",kind:"institutional",title:"Guia Brava | Dúvidas sobre desentupimento",description:"Orientações sobre pia, vaso, ralo, esgoto, caixa de gordura, orçamento e prevenção de entupimentos.",h1:"Guia sobre desentupimento e prevenção",eyebrow:"CONTEÚDO ÚTIL",intro:"Informação clara para reconhecer sinais, reduzir riscos e saber quando chamar ajuda profissional.",image:"kitchen",sections:[{heading:"Dúvidas frequentes, respostas diretas",text:"Escolha um conteúdo para entender sinais de obstrução, cuidados seguros e informações necessárias para solicitar atendimento."}],related:articlePages.map(p=>p.path)},
   {path:"/politica-de-privacidade/",slug:"politica-de-privacidade",kind:"institutional",title:"Política de privacidade | Brava Desentupidora",description:"Saiba como a Brava trata informações enviadas pelo site, WhatsApp e telefone.",h1:"Política de privacidade",eyebrow:"TRANSPARÊNCIA",intro:"Esta política explica como informações podem ser utilizadas no atendimento.",image:"pipe",sections:[{heading:"Dados fornecidos",text:"Podemos receber nome, telefone, endereço do atendimento, mensagens, fotografias enviadas voluntariamente e informações necessárias para avaliar o serviço."},{heading:"Finalidades",text:"Os dados são utilizados para responder solicitações, avaliar cobertura, preparar orçamento, organizar atendimento e cumprir obrigações legais."},{heading:"Compartilhamento",text:"Informações necessárias podem ser compartilhadas com profissionais envolvidos no atendimento e plataformas de comunicação ou hospedagem, conforme suas políticas."},{heading:"Direitos do titular",text:"Nos termos da LGPD, o titular pode solicitar acesso, correção e outras medidas aplicáveis por meio dos canais da empresa."}],related:["/termos-de-uso/"]},
@@ -273,12 +274,24 @@ export const priorityLocations = locationPages.filter(p=>["Santo Amaro","Campo B
 export const featuredMetroLocations = locationPages.filter(p=>["Diadema","Taboão da Serra","São Bernardo do Campo","Embu das Artes","São Caetano do Sul","Santo André","Osasco","Itapecerica da Serra","Cotia","Carapicuíba","Mauá","Barueri","Embu-Guaçu","Ribeirão Pires","Santana de Parnaíba","Jandira"].includes(p.location||""));
 
 export const homeFaq:FAQ[] = [
-  {q:"Quanto custa uma desentupidora em São Paulo?",a:"Em referências de mercado publicadas em 2026, pia, ralo e vaso costumam ficar entre R$ 150 e R$ 400. Esgoto e caixa de gordura podem apresentar valores maiores. A Brava faz a avaliação inicial gratuita e informa o orçamento antes do serviço."},
+  {q:"Quanto custa uma desentupidora em São Paulo?",a:"O valor depende do que entupiu, do acesso à tubulação e do equipamento necessário. A Brava faz a visita inicial gratuita e passa o orçamento antes do serviço."},
   {q:"A Brava Desentupidora atende 24 horas?",a:"Sim. Os canais recebem solicitações durante o dia, à noite, aos domingos e feriados. A previsão é confirmada conforme o endereço e o horário do contato."},
   {q:"Quais serviços de desentupimento estão disponíveis?",a:"A Brava atende pia, vaso sanitário, ralo, esgoto, caixa de gordura e demandas residenciais, comerciais e condominiais."},
   {q:"A visita é gratuita?",a:"Sim. A avaliação inicial é gratuita e o serviço só começa depois da apresentação e aprovação do orçamento."},
+  {q:"Em quanto tempo a equipe chega?",a:"A previsão depende do seu endereço, do horário e da disponibilidade da equipe. Informe seu bairro pelo WhatsApp ou telefone para confirmar."},
+  {q:"Como funciona o orçamento pelo WhatsApp?",a:"Conte o que entupiu, onde você está e se é urgente. A equipe orienta você sobre a visita. Depois da avaliação no local, você recebe o valor para decidir se quer seguir com o serviço."},
+  {q:"O atendimento é no meu endereço?",a:"Sim. A equipe vai ao endereço informado, após confirmar a cobertura e combinar a visita com você."},
+  {q:"Como posso pagar pelo serviço?",a:"Confirme com a equipe as formas de pagamento disponíveis antes de aprovar o orçamento."},
   {q:"Quais regiões são atendidas?",a:"O atendimento abrange bairros de São Paulo, cidades do ABC e outros municípios da Grande São Paulo, conforme disponibilidade para o endereço."},
   {q:"Como solicitar atendimento?",a:"Chame pelo WhatsApp ou telefone e informe o endereço, o ponto entupido, os sinais observados e a urgência."}
+];
+
+export const homeRelatedPages = [
+  "/desentupidora-24-horas/",
+  "/desentupimento-de-pia/",
+  "/desentupimento-de-vaso-sanitario/",
+  "/desentupimento-de-esgoto/",
+  "/preco-de-desentupidora-em-sao-paulo/"
 ];
 
 export const getPageFaq=(page?:PageData):FAQ[]=>{

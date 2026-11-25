@@ -39,9 +39,8 @@ export function BudgetForm(){
   return <section className="budget-section" aria-labelledby="budget-title">
     <div className="container budget-grid">
       <div className="budget-copy">
-        <span className="eyebrow">ORÇAMENTO PELO WHATSAPP</span>
-        <h2 id="budget-title">Conte o que aconteceu e fale com a Brava</h2>
-        <p>Preencha os dados abaixo. Ao enviar, abriremos o WhatsApp com as informações organizadas para agilizar o seu atendimento.</p>
+        <h2 id="budget-title">Fale com a Brava agora</h2>
+        <p>Diga o que entupiu, onde você está e se é urgente. Ao enviar o formulário, o WhatsApp abre com a mensagem pronta para você enviar à equipe.</p>
         <div className="budget-benefits"><span>Atendimento 24 horas</span><span>Visita gratuita</span><span>Orçamento antes do serviço</span></div>
       </div>
       <form className="budget-form" onSubmit={submit}>

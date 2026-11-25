@@ -13,14 +13,40 @@ export function CTAs({location,compact=false}:{location?:string;compact?:boolean
 
 export function Photo({name,className=""}:{name:keyof typeof images;className?:string}){const photo=images[name];return <figure className={`photo ${className}`}><img src={photo.src} alt={photo.alt} loading={name==="hero"?"eager":"lazy"}/></figure>}
 
-export function ServiceGrid({limit}:{limit?:number}){const items=limit?servicePages.slice(0,limit):servicePages;return <div className="card-grid">{items.map((p,i)=><Link className="service-card" href={p.path} key={p.path}><img src={images[p.image].src} alt={images[p.image].alt} loading="lazy"/><div><span>0{i+1}</span><h3>{p.h1.replace(" em São Paulo","")}</h3><p>{p.description.split(".")[0]}.</p><b>Conhecer serviço →</b></div></Link>)}</div>}
+export function ServiceGrid({limit}:{limit?:number}){
+  const items=limit?servicePages.slice(0,limit):servicePages;
+  return <div className="card-grid">{items.map(page=>(
+    <Link className="service-card" href={page.path} key={page.path}>
+      <img src={images[page.image].src} alt={images[page.image].alt} loading="lazy"/>
+      <div>
+        <h3>{page.h1.replace(" em São Paulo","")}</h3>
+        <p>{page.serviceSummary}</p>
+        <b>Ver detalhes do serviço</b>
+      </div>
+    </Link>
+  ))}</div>;
+}
 
 type LocationGroup="priority"|"metro"|"santo-andre"|"sao-bernardo"|"all";
 export function LocationLinks({all=false,group="priority"}:{all?:boolean;group?:LocationGroup}){const selected=all?"all":group;const items=selected==="all"?allLocationPages:selected==="metro"?featuredMetroLocations:selected==="santo-andre"?santoAndreNeighborhoodPages:selected==="sao-bernardo"?saoBernardoNeighborhoodPages:priorityLocations;return <div className="pills">{items.map(p=><Link href={p.path} key={p.path}>{p.location?.replace(", Santo André","").replace(", São Bernardo do Campo","")}</Link>)}</div>}
 
 export function FAQList({items}:{items:FAQ[]}){return <div className="faq">{items.map(item=><details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div>}
 
-export function TrustSection(){return <section className="section pale"><div className="container"><div className="section-head"><span className="eyebrow">POR QUE ESCOLHER A BRAVA</span><h2>Atendimento claro do início ao fim</h2><p>Você explica o problema, recebe a avaliação e conhece o orçamento antes de autorizar o serviço.</p></div><div className="trust-grid"><article><strong>24h</strong><h3>Atendimento todos os dias</h3><p>Solicitações durante o dia, à noite, aos domingos e feriados.</p></article><article><strong>R$ 0</strong><h3>Visita gratuita</h3><p>Avaliação inicial e orçamento apresentados antes do serviço.</p></article><article><strong>2 canais</strong><h3>WhatsApp e ligação</h3><p>Escolha como prefere falar com a equipe e solicitar atendimento.</p></article></div></div></section>}
+export function TrustSection(){
+  return <section className="section pale">
+    <div className="container">
+      <div className="section-head">
+        <h2>Quem é a Brava Desentupidora?</h2>
+        <p>A Brava atende no endereço do cliente, em casas, apartamentos, condomínios e comércios de São Paulo.</p>
+      </div>
+      <div className="trust-grid">
+        <article><h3>Atendimento a qualquer hora</h3><p>Fale com a equipe durante o dia, de madrugada, aos domingos ou em feriados para combinar a visita.</p></article>
+        <article><h3>Visita gratuita</h3><p>O técnico avalia o entupimento e passa o valor antes de você autorizar o serviço.</p></article>
+        <article><h3>Equipamento para cada caso</h3><p>A equipe avalia o acesso e o tipo de tubulação para escolher como desobstruir o ponto entupido.</p></article>
+      </div>
+    </div>
+  </section>;
+}
 
 export function MarketPriceTable(){const rows=[
   ["São Paulo capital","R$ 250–450","R$ 280–500","R$ 350–700","R$ 400–800"],
