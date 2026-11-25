@@ -1,0 +1,41 @@
+# Brava Desentupidora SP
+
+Site institucional e de SEO local em Next.js, preparado para publicação na Vercel.
+
+## Estrutura
+
+- Santo Amaro como núcleo territorial principal, incluindo bairros destacados em fonte oficial da Prefeitura de São Paulo.
+- Santo André como segundo núcleo estratégico.
+- Páginas individuais para todas as localidades solicitadas.
+- Páginas de serviços, intenções de busca, artigos e áreas atendidas.
+- Sitemap, robots, canonical, Open Graph e JSON-LD.
+- CTAs de WhatsApp e ligação.
+- Imagens gratuitas com créditos e páginas de origem registradas.
+
+## Configuração antes da publicação
+
+Os números atuais são simulados, conforme autorizado para a construção inicial. Configure na Vercel:
+
+```env
+SITE_URL=https://dominio-final.com.br
+SITE_INDEXING=true
+NEXT_PUBLIC_PHONE_DISPLAY=(11) 00000-0000
+NEXT_PUBLIC_PHONE=+5511000000000
+NEXT_PUBLIC_WHATSAPP=5511000000000
+```
+
+## Desenvolvimento
+
+```bash
+pnpm install
+pnpm dev
+pnpm audit
+pnpm build
+```
+
+## Fontes territoriais
+
+- Prefeitura de São Paulo, Subprefeitura de Santo Amaro: distritos Santo Amaro, Campo Belo e Campo Grande.
+- Caderno regional da Subprefeitura de Santo Amaro para bairros destacados.
+
+As páginas não afirmam existência de filial física em cada localidade. A cobertura deve ser confirmada no atendimento.
