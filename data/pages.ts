@@ -1,5 +1,6 @@
 import {images} from "./images";
 import {santoAndreNeighborhoods,saoBernardoNeighborhoods,serviceAreaTargets} from "./expansion";
+import {serviceGuides} from "./service-guides";
 
 export type FAQ = {q:string; a:string};
 export type PageKind = "location"|"service"|"intent"|"article"|"institutional";
@@ -121,19 +122,23 @@ export const servicePages = serviceSeed.map(([slug,name,,image,serviceSummary]):
   serviceSummary,
   intro:`${serviceSummary} Ligue ou mande uma mensagem para pedir a visita gratuita.`,
   sections:[
-    {heading:`Quando solicitar ${name.toLowerCase()}`,text:`Procure ajuda quando houver escoamento lento, retorno de água, barulhos na tubulação, mau cheiro persistente ou risco de transbordamento. Evite insistir em produtos corrosivos sem saber a causa da obstrução.`},
-    {heading:"Avaliação e equipamento adequado",text:"O profissional verifica o ponto afetado, as condições de acesso e os sinais apresentados. O método depende da tubulação e da extensão do bloqueio; por isso, o diagnóstico deve vir antes da execução."},
+    ...serviceGuides[slug].sections,
     {heading:"Orçamento transparente",text:"A visita inicial é gratuita. O preço é apresentado após a avaliação e deve ser autorizado antes do início. Pergunte o que está incluído e tire suas dúvidas durante o atendimento."},
     {heading:"Atendimento residencial, comercial e para condomínios",text:"A Brava recebe chamados de casas, apartamentos, restaurantes, bares, lojas, condomínios, galpões e indústrias em São Paulo e cidades da região metropolitana."}
   ],
   faq:[
     {q:`Quanto custa ${name.toLowerCase()}?`,a:"O preço depende do acesso, da extensão da obstrução e do equipamento necessário. A visita é gratuita e o orçamento é informado antes do serviço."},
     {q:"O atendimento funciona à noite e nos feriados?",a:"Sim. A Brava recebe chamados 24 horas, inclusive à noite, aos domingos e feriados, conforme disponibilidade para o endereço."},
-    {q:"Posso tentar resolver com produto químico?",a:"Produtos inadequados podem danificar tubulações ou causar acidentes. Se houver retorno, transbordamento ou recorrência, interrompa o uso do ponto e solicite avaliação profissional."}
+    ...serviceGuides[slug].faq
   ],related:["/servicos/","/desentupidora-santo-amaro/","/desentupidora-santo-andre/"]
 }));
 
-export const serviceAreaPages:PageData[] = serviceSeed.flatMap(([serviceSlug,serviceName,target,image],serviceIndex)=>
+const santoAmaroToiletSection = {
+  heading: "Vaso entupido em Santo Amaro: o que dizer no chamado",
+  text: "Se for em apartamento, informe o bloco e se o ralo do box também borbulha quando você dá descarga. Se for em loja ou restaurante perto do Largo Treze, diga se o banheiro está interditado e quem pode liberar o acesso. Se houve queda de algum objeto, mencione isso antes da visita."
+};
+
+export const serviceAreaPages:PageData[] = serviceSeed.flatMap(([serviceSlug,serviceName,target,image,serviceSummary],serviceIndex)=>
   serviceAreaTargets.map(([location,locationSlug],locationIndex)=>({
     path:`/${serviceSlug}-${locationSlug}/`,
     slug:`${serviceSlug}-${locationSlug}`,
@@ -143,18 +148,17 @@ export const serviceAreaPages:PageData[] = serviceSeed.flatMap(([serviceSlug,ser
     description:`${serviceName} em ${location} para ${target}. Atendimento 24 horas, visita gratuita, WhatsApp e telefone.`,
     h1:`${serviceName} em ${location}`,
     eyebrow:"SERVIÇO LOCAL 24 HORAS",
-    intro:`Atendimento de ${serviceName.toLowerCase()} em ${location} para ${target}. Informe o endereço e os sinais observados para consultar disponibilidade e solicitar a visita gratuita.`,
+    intro:`${serviceSummary} Fale com a Brava para pedir uma visita gratuita em ${location}.`,
     image:(serviceIndex+locationIndex)%3===0?image:(serviceIndex+locationIndex)%3===1?"pipe":"drain",
     sections:[
-      {heading:`Quando solicitar ${serviceName.toLowerCase()} em ${location}`,text:`Escoamento lento, retorno de água, borbulhamento, mau cheiro ou transbordamento indicam que o ponto precisa ser avaliado. Interrompa o uso se houver risco de alagamento ou contato com esgoto.`},
-      {heading:`Atendimento local em ${location}`,text:`A Brava atende casas, apartamentos, condomínios, restaurantes, lojas, galpões e empresas em ${location}. O endereço completo ajuda a confirmar a cobertura e a previsão de atendimento.`},
-      {heading:"Diagnóstico antes da execução",text:"O método depende do acesso, do tipo de tubulação e da extensão da obstrução. A equipe avalia o local antes de indicar o procedimento e evita prometer uma solução sem verificar a situação."},
+      ...serviceGuides[serviceSlug].sections,
+      ...(serviceSlug==="desentupimento-de-vaso-sanitario" && locationSlug==="santo-amaro" ? [santoAmaroToiletSection] : []),
       {heading:"Visita gratuita e orçamento claro",text:`A visita inicial em ${location} é gratuita. O orçamento de ${serviceName.toLowerCase()} é apresentado antes da execução e o serviço só começa depois da autorização do cliente.`}
     ],
     faq:[
       {q:`Quanto custa ${serviceName.toLowerCase()} em ${location}?`,a:"O preço depende do acesso, da extensão do bloqueio e do equipamento necessário. A visita é gratuita e o orçamento é informado antes da execução."},
       {q:`A Brava atende ${location} agora?`,a:"Os canais recebem solicitações 24 horas. A disponibilidade e a previsão são confirmadas a partir do endereço completo."},
-      {q:"Quais informações devo enviar?",a:`Informe o endereço em ${location}, o ponto afetado, os sinais observados e se o problema atingiu outros pontos do imóvel.`}
+      ...serviceGuides[serviceSlug].faq
     ],
     related:[`/${serviceSlug}/`,`/desentupidora-${locationSlug}/`,"/orcamento-de-desentupimento/"]
   })));
