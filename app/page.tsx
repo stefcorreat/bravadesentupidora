@@ -16,7 +16,12 @@ export default function Home(){
           <h1>Brava Desentupidora 24 horas em São Paulo</h1>
           <p><strong>Pia, vaso, ralo ou esgoto entupido?</strong> Conte o que aconteceu pelo WhatsApp ou por telefone. A Brava vai até o seu endereço em São Paulo, avalia o problema e passa o orçamento antes de começar.</p>
           <CTAs location="São Paulo"/>
-          <div className="hero-badges"><span>✓ Atendimento 24h</span><span>✓ Visita gratuita</span><span>✓ Orçamento antes do serviço</span></div>
+          <div className="hero-badges">
+            <span>✓ Atendimento 24h</span>
+            <span>✓ Visita gratuita</span>
+            <span>✓ Só paga se resolver</span>
+            <span>✓ Garantia do serviço</span>
+          </div>
         </div>
       </section>
       <EmergencyBar/>

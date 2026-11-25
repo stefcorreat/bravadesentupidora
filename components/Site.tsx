@@ -42,6 +42,8 @@ export function TrustSection(){
       <div className="trust-grid">
         <article><h3>Atendimento a qualquer hora</h3><p>Fale com a equipe durante o dia, de madrugada, aos domingos ou em feriados para combinar a visita.</p></article>
         <article><h3>Visita gratuita</h3><p>O técnico avalia o entupimento e passa o valor antes de você autorizar o serviço.</p></article>
+        <article><h3>Só paga se resolver</h3><p>Se o técnico não conseguir desentupir o ponto avaliado, você não paga pelo atendimento.</p></article>
+        <article><h3>Garantia do serviço</h3><p>O desentupimento realizado tem garantia. Consulte a equipe sobre o prazo e a cobertura para o seu caso.</p></article>
         <article><h3>Equipamento para cada caso</h3><p>A equipe avalia o acesso e o tipo de tubulação para escolher como desobstruir o ponto entupido.</p></article>
       </div>
     </div>
