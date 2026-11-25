@@ -174,15 +174,17 @@ display:flex;
 align-items:center;
 overflow:hidden;
 background:var(--blue-dark)}
-.hero-photo{
+.hero > .hero-photo{
 position:absolute;
 inset:0;
 margin:0;
-height:100%}
-.hero-photo img{
+}
+.hero > .hero-photo img{
 width:100%;
 height:100%;
-object-fit:cover}
+object-fit:cover;
+border-radius:0;
+box-shadow:none}
 .hero-photo figcaption{
 display:none}
 .hero-shade{
@@ -195,7 +197,7 @@ position:relative;
 z-index:2;
 color:#fff;
 padding:95px 0;
-max-width:1180px}
+min-width:0}
 .hero-content h1{
 font-size:clamp(42px,5.8vw,76px);
 line-height:1.02;
@@ -238,14 +240,14 @@ background:var(--blue-dark);
 color:#fff;
 box-shadow:none}
 .emergency .button.secondary{
-background:transparent;
-border-color:currentColor;
-color:#161a20}
+background:#fff;
+border-color:#fff;
+color:var(--blue-dark)}
 .emergency .button:hover{
 background:#002d5c}
 .emergency .button.secondary:hover{
-background:#161a20;
-color:#fff}
+background:var(--pale);
+color:var(--blue-dark)}
 .section{
 padding:92px 0}
 .section.pale{
@@ -632,19 +634,22 @@ font-size:20px}
 width:39px;
 height:39px}
 .hero{
-min-height:680px}
+min-height:0}
 .hero-shade{
 background:linear-gradient(180deg,rgba(0,38,77,.9),rgba(0,38,77,.98))}
 .hero-content{
-padding:70px 0}
+padding:clamp(40px,9vw,64px) 0}
 .hero-content h1{
-font-size:clamp(36px,11vw,43px)}
+font-size:clamp(28px,9vw,43px);
+overflow-wrap:anywhere}
 .hero-content>p{
 font-size:17px}
 .ctas{
-display:grid}
+display:grid;
+grid-template-columns:minmax(0,1fr)}
 .ctas .button{
-width:100%}
+width:100%;
+text-align:center}
 .hero-badges{
 display:grid;
 gap:8px}
@@ -664,7 +669,8 @@ order:-1}
 .page-hero{
 padding:50px 0}
 .page-hero h1{
-font-size:clamp(34px,10vw,42px)}
+font-size:clamp(28px,9vw,42px);
+overflow-wrap:anywhere}
 .page-hero .photo img{
 aspect-ratio:16/10}
 .content-wrap{
@@ -912,8 +918,6 @@ color:var(--orange)}
 .logo strong{font-size:18px}
 .logo small{font-size:8px}
 .mobile-menu>div{width:min(230px,calc(100vw - 24px))}
-.hero{min-height:640px}
-.hero-content{padding:58px 0}
 .section-head h2,.split h2,.dark h2,.cta-section h2{font-size:31px}
 .emergency{padding-inline:18px}
 .budget-copy h2{font-size:31px}}
@@ -979,4 +983,3 @@ color:var(--orange)}
 .customer-review blockquote {
   margin: 8px 0 0;
 }
-
