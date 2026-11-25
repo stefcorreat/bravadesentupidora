@@ -1,6 +1,7 @@
 import type {Metadata,Viewport} from "next";
 import "./globals.css";
 import {Footer,Header} from "@/components/Site";
+import {BudgetForm} from "@/components/BudgetForm";
 import {absoluteUrl,site} from "@/lib/site";
 
 export const metadata:Metadata={
@@ -14,5 +15,5 @@ export const metadata:Metadata={
 };
 export const viewport:Viewport={width:"device-width",initialScale:1,themeColor:"#075ea8"};
 
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="pt-BR"><body><a className="skip" href="#conteudo">Ir para o conteúdo</a><Header/>{children}<Footer/></body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="pt-BR"><body><a className="skip" href="#conteudo">Ir para o conteúdo</a><Header/>{children}<BudgetForm/><Footer/></body></html>}
 

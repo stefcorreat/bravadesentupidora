@@ -16,6 +16,7 @@ for(const path of urls){
   if(!h1)errors.push(`${path}: sem H1`); else if(h1s.has(h1))errors.push(`${path}: H1 duplicado com ${h1s.get(h1)}`); else h1s.set(h1,path);
   if(!canonical||new URL(canonical).pathname!==path||new URL(canonical).origin!==expectedCanonicalOrigin)errors.push(`${path}: canonical incorreto`);
   if(!html.includes('application/ld+json'))errors.push(`${path}: sem JSON-LD`);
+  if(!html.includes('class="budget-form"'))errors.push(`${path}: sem formulário de orçamento`);
 }
 if(urls.length<200)errors.push(`Sitemap insuficiente: ${urls.length} URLs; mínimo esperado 200`);
 if(errors.length){console.error(errors.join("\n"));process.exit(1)}
