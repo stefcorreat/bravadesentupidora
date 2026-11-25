@@ -1,4 +1,5 @@
 import {images} from "./images";
+import {santoAndreNeighborhoods,saoBernardoNeighborhoods,serviceAreaTargets} from "./expansion";
 
 export type FAQ = {q:string; a:string};
 export type PageKind = "location"|"service"|"intent"|"article"|"institutional";
@@ -7,6 +8,8 @@ export type PageData = {
   eyebrow:string; intro:string; image:keyof typeof images; sections:{heading:string;text:string}[];
   faq?:FAQ[]; related?:string[]; location?:string;
 };
+
+const slugify = (value:string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"");
 
 const locationSeed = [
   ["Santo Amaro","santo-amaro","núcleo comercial e residencial da Zona Sul, com atendimento também no Centro Histórico, Largo Treze e eixos próximos às avenidas Santo Amaro e Nações Unidas"],
@@ -72,6 +75,35 @@ export const locationPages:PageData[] = locationSeed.map(([name,slug,context],in
   ], faq:locationFaq(name), related:["/servicos/","/desentupidora-aberta-agora/","/desentupidora-santo-amaro/"]
 }));
 
+const neighborhoodPage = (name:string,city:string,citySlug:string,index:number):PageData => {
+  const localLabel = `${name}, ${city}`;
+  const cityPage = `/desentupidora-${citySlug}/`;
+  return {
+    path:`/desentupidora-${slugify(name)}-${citySlug}/`,
+    slug:`desentupidora-${slugify(name)}-${citySlug}`,
+    kind:"location",
+    location:localLabel,
+    title:`Desentupidora em ${name}, ${city} 24h | Brava`,
+    description:`Desentupidora no bairro ${name}, em ${city}, com atendimento 24 horas para pia, vaso, ralo, esgoto e caixa de gordura. Visita gratuita.`,
+    h1:`Desentupidora no bairro ${name}, em ${city}`,
+    eyebrow:`ATENDIMENTO LOCAL EM ${city.toUpperCase()}`,
+    intro:`Precisa de desentupidora no bairro ${name}? A Brava recebe chamados 24 horas em ${city} para imóveis residenciais, comerciais e condomínios, com visita gratuita e orçamento antes da execução.`,
+    image:index%4===0?"drain":index%4===1?"sink":index%4===2?"pipe":"night",
+    sections:[
+      {heading:`Atendimento de desentupimento no bairro ${name}`,text:`A equipe recebe solicitações para ${name} e verifica a disponibilidade a partir do endereço completo. Informe se o problema está em casa, apartamento, condomínio, restaurante, loja, galpão ou outro tipo de imóvel em ${city}.`},
+      {heading:`Serviços disponíveis em ${name}`,text:"O atendimento cobre entupimentos em pia, vaso sanitário, ralo, rede de esgoto e caixa de gordura. Sinais como água voltando, borbulhamento, mau cheiro e transbordamento ajudam a identificar a urgência do chamado."},
+      {heading:"Visita gratuita e orçamento antes da execução",text:`A avaliação inicial em ${localLabel} é gratuita. Depois de verificar o acesso, a tubulação e a provável extensão da obstrução, o orçamento é apresentado para aprovação antes do início do serviço.`},
+      {heading:`Desentupidora 24 horas em ${localLabel}`,text:"Os canais de WhatsApp e telefone recebem solicitações durante o dia, à noite, aos domingos e feriados. A previsão de chegada depende da localização exata e da disponibilidade operacional no momento."}
+    ],
+    faq:locationFaq(localLabel),
+    related:[cityPage,"/desentupidora-aberta-agora/","/servicos/"]
+  };
+};
+
+export const santoAndreNeighborhoodPages:PageData[] = santoAndreNeighborhoods.map((name,index)=>neighborhoodPage(name,"Santo André","santo-andre",index));
+export const saoBernardoNeighborhoodPages:PageData[] = saoBernardoNeighborhoods.map((name,index)=>neighborhoodPage(name,"São Bernardo do Campo","sao-bernardo-do-campo",index));
+export const allLocationPages:PageData[] = [...locationPages,...santoAndreNeighborhoodPages,...saoBernardoNeighborhoodPages];
+
 const serviceSeed = [
   ["desentupimento-de-pia","Desentupimento de pia","pia de cozinha ou banheiro","sink"],
   ["desentupimento-de-vaso-sanitario","Desentupimento de vaso sanitário","vaso sanitário com escoamento lento, transbordamento ou retorno","kitchen"],
@@ -99,6 +131,32 @@ export const servicePages:PageData[] = serviceSeed.map(([slug,name,target,image]
     {q:"Posso tentar resolver com produto químico?",a:"Produtos inadequados podem danificar tubulações ou causar acidentes. Se houver retorno, transbordamento ou recorrência, interrompa o uso do ponto e solicite avaliação profissional."}
   ],related:["/servicos/","/desentupidora-santo-amaro/","/desentupidora-santo-andre/"]
 }));
+
+export const serviceAreaPages:PageData[] = serviceSeed.flatMap(([serviceSlug,serviceName,target,image],serviceIndex)=>
+  serviceAreaTargets.map(([location,locationSlug],locationIndex)=>({
+    path:`/${serviceSlug}-${locationSlug}/`,
+    slug:`${serviceSlug}-${locationSlug}`,
+    kind:"service" as const,
+    location,
+    title:`${serviceName} em ${location} 24h | Brava`,
+    description:`${serviceName} em ${location} para ${target}. Atendimento 24 horas, visita gratuita, WhatsApp e telefone.`,
+    h1:`${serviceName} em ${location}`,
+    eyebrow:"SERVIÇO LOCAL 24 HORAS",
+    intro:`Atendimento de ${serviceName.toLowerCase()} em ${location} para ${target}. Informe o endereço e os sinais observados para consultar disponibilidade e solicitar a visita gratuita.`,
+    image:(serviceIndex+locationIndex)%3===0?image:(serviceIndex+locationIndex)%3===1?"pipe":"drain",
+    sections:[
+      {heading:`Quando solicitar ${serviceName.toLowerCase()} em ${location}`,text:`Escoamento lento, retorno de água, borbulhamento, mau cheiro ou transbordamento indicam que o ponto precisa ser avaliado. Interrompa o uso se houver risco de alagamento ou contato com esgoto.`},
+      {heading:`Atendimento local em ${location}`,text:`A Brava atende casas, apartamentos, condomínios, restaurantes, lojas, galpões e empresas em ${location}. O endereço completo ajuda a confirmar a cobertura e a previsão de atendimento.`},
+      {heading:"Diagnóstico antes da execução",text:"O método depende do acesso, do tipo de tubulação e da extensão da obstrução. A equipe avalia o local antes de indicar o procedimento e evita prometer uma solução sem verificar a situação."},
+      {heading:"Visita gratuita e orçamento claro",text:`A visita inicial em ${location} é gratuita. O orçamento de ${serviceName.toLowerCase()} é apresentado antes da execução e o serviço só começa depois da autorização do cliente.`}
+    ],
+    faq:[
+      {q:`Quanto custa ${serviceName.toLowerCase()} em ${location}?`,a:"O preço depende do acesso, da extensão do bloqueio e do equipamento necessário. A visita é gratuita e o orçamento é informado antes da execução."},
+      {q:`A Brava atende ${location} agora?`,a:"Os canais recebem solicitações 24 horas. A disponibilidade e a previsão são confirmadas a partir do endereço completo."},
+      {q:"Quais informações devo enviar?",a:`Informe o endereço em ${location}, o ponto afetado, os sinais observados e se o problema atingiu outros pontos do imóvel.`}
+    ],
+    related:[`/${serviceSlug}/`,`/desentupidora-${locationSlug}/`,"/orcamento-de-desentupimento/"]
+  })));
 
 const intentSeed = [
   ["desentupidora-perto-de-mim","Desentupidora perto de mim","atendimento por localização em São Paulo e Grande SP"],
@@ -157,9 +215,9 @@ export const institutionalPages:PageData[] = [
   {path:"/creditos-de-imagens/",slug:"creditos-de-imagens",kind:"institutional",title:"Créditos de imagens | Brava Desentupidora",description:"Fontes e créditos das fotografias gratuitas utilizadas no site da Brava.",h1:"Créditos das imagens",eyebrow:"FONTES VISUAIS",intro:"Fotografias provisórias selecionadas em bancos com licença gratuita, substituíveis por imagens reais da Brava.",image:"hero",sections:Object.values(images).map(img=>({heading:img.credit,text:`Fonte: ${img.source}`})),related:["/sobre/"]}
 ];
 
-export const allPages = [...institutionalPages,...servicePages,...locationPages,...intentPages,...articlePages];
+export const allPages = [...institutionalPages,...servicePages,...serviceAreaPages,...allLocationPages,...intentPages,...articlePages];
 export const findPage = (path:string) => allPages.find(p=>p.path===path);
 
 export const priorityLocations = locationPages.filter(p=>["Santo Amaro","Campo Belo","Brooklin","Moema","Jabaquara","Interlagos","Socorro","Cidade Ademar","Vila Mariana","Saúde"].includes(p.location||""));
-export const metroLocations = locationPages.filter(p=>!priorityLocations.includes(p));
+export const featuredMetroLocations = locationPages.filter(p=>["Diadema","Taboão da Serra","São Bernardo do Campo","Embu das Artes","São Caetano do Sul","Santo André","Osasco","Itapecerica da Serra","Cotia","Carapicuíba","Mauá","Barueri","Embu-Guaçu","Ribeirão Pires","Santana de Parnaíba","Jandira"].includes(p.location||""));
 

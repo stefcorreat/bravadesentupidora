@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "audit": "node scripts/audit.mjs",
-    "audit:live": "node scripts/audit-live.mjs"
+    "audit:live": "node scripts/audit-live.mjs",
+    "verify:production": "node scripts/verify-production.mjs"
   },
   "dependencies": {
     "next": "16.4.6",

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {images} from "@/data/images";
-import {allPages,locationPages,priorityLocations,servicePages,type FAQ,type PageData} from "@/data/pages";
+import {allPages,allLocationPages,featuredMetroLocations,priorityLocations,santoAndreNeighborhoodPages,saoBernardoNeighborhoodPages,servicePages,type FAQ,type PageData} from "@/data/pages";
 import {site,whatsappUrl} from "@/lib/site";
 
 export function Logo(){return <Link className="logo" href="/" aria-label="Brava Desentupidora - início"><span className="logo-mark">B</span><span><strong>BRAVA</strong><small>DESENTUPIDORA SP</small></span></Link>}
@@ -15,7 +15,8 @@ export function Photo({name,className=""}:{name:keyof typeof images;className?:s
 
 export function ServiceGrid({limit}:{limit?:number}){const items=limit?servicePages.slice(0,limit):servicePages;return <div className="card-grid">{items.map((p,i)=><Link className="service-card" href={p.path} key={p.path}><img src={images[p.image].src} alt={images[p.image].alt} loading="lazy"/><div><span>0{i+1}</span><h3>{p.h1.replace(" em São Paulo","")}</h3><p>{p.description.split(".")[0]}.</p><b>Conhecer serviço →</b></div></Link>)}</div>}
 
-export function LocationLinks({all=false}:{all?:boolean}){const items=all?locationPages:priorityLocations;return <div className="pills">{items.map(p=><Link href={p.path} key={p.path}>{p.location}</Link>)}</div>}
+type LocationGroup="priority"|"metro"|"santo-andre"|"sao-bernardo"|"all";
+export function LocationLinks({all=false,group="priority"}:{all?:boolean;group?:LocationGroup}){const selected=all?"all":group;const items=selected==="all"?allLocationPages:selected==="metro"?featuredMetroLocations:selected==="santo-andre"?santoAndreNeighborhoodPages:selected==="sao-bernardo"?saoBernardoNeighborhoodPages:priorityLocations;return <div className="pills">{items.map(p=><Link href={p.path} key={p.path}>{p.location?.replace(", Santo André","").replace(", São Bernardo do Campo","")}</Link>)}</div>}
 
 export function FAQList({items}:{items:FAQ[]}){return <div className="faq">{items.map(item=><details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div>}
 
