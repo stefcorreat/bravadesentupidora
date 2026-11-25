@@ -23,10 +23,10 @@ export function FAQList({items}:{items:FAQ[]}){return <div className="faq">{item
 export function TrustSection(){return <section className="section pale"><div className="container"><div className="section-head"><span className="eyebrow">POR QUE ESCOLHER A BRAVA</span><h2>Atendimento claro do início ao fim</h2><p>Você explica o problema, recebe a avaliação e conhece o orçamento antes de autorizar o serviço.</p></div><div className="trust-grid"><article><strong>24h</strong><h3>Atendimento todos os dias</h3><p>Solicitações durante o dia, à noite, aos domingos e feriados.</p></article><article><strong>R$ 0</strong><h3>Visita gratuita</h3><p>Avaliação inicial e orçamento apresentados antes do serviço.</p></article><article><strong>2 canais</strong><h3>WhatsApp e ligação</h3><p>Escolha como prefere falar com a equipe e solicitar atendimento.</p></article></div></div></section>}
 
 export function MarketPriceTable(){const rows=[
-  ["São Paulo capital","R$ 150–350","R$ 180–400","R$ 250–600","R$ 300–700"],
-  ["Zona Sul e Santo Amaro","R$ 150–350","R$ 180–400","R$ 250–600","R$ 300–700"],
-  ["ABC Paulista","R$ 180–380","R$ 200–420","R$ 250–600","R$ 300–700"],
-  ["Outras cidades da Grande SP","R$ 180–400","R$ 200–450","R$ 300–650","R$ 350–800"]
+  ["São Paulo capital","R$ 250–450","R$ 280–500","R$ 350–700","R$ 400–800"],
+  ["Zona Sul e Santo Amaro","R$ 250–450","R$ 280–500","R$ 350–700","R$ 400–800"],
+  ["ABC Paulista","R$ 280–480","R$ 300–520","R$ 350–700","R$ 400–800"],
+  ["Outras cidades da Grande SP","R$ 280–500","R$ 300–550","R$ 400–750","R$ 450–900"]
 ];return <section className="market-prices"><h2>Faixas de preço de desentupimento por região</h2><p>Valores de referência encontrados em levantamentos de mercado publicados em 2026. Não são preços fixos da Brava: o orçamento final depende da avaliação gratuita do local.</p><div className="table-scroll"><table><thead><tr><th>Região</th><th>Pia ou ralo</th><th>Vaso sanitário</th><th>Caixa de gordura</th><th>Esgoto ou coluna</th></tr></thead><tbody>{rows.map(row=><tr key={row[0]}>{row.map((cell,index)=>index===0?<th scope="row" key={cell}>{cell}</th>:<td key={cell}>{cell}</td>)}</tr>)}</tbody></table></div><small>Referências consultadas: guias de preço Loqal, Vistobra e tabelas publicadas por empresas de desentupimento de São Paulo e do ABC em 2026. Serviços noturnos, acesso difícil e equipamentos especiais podem alterar os valores.</small></section>}
 
 export function Related({paths=[]}:{paths?:string[]}){const pages=paths.map(path=>allPages.find(p=>p.path===path)).filter(Boolean) as PageData[];if(!pages.length)return null;return <aside className="related"><h2>Veja também</h2><div>{pages.slice(0,12).map(p=><Link href={p.path} key={p.path}>{p.h1}</Link>)}</div></aside>}
