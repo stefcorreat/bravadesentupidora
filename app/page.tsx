@@ -1,7 +1,54 @@
 import Link from "next/link";
-import {CTAs,EmergencyBar,LocationLinks,Photo,ServiceGrid,TrustSection} from "@/components/Site";
+import {CTAs,EmergencyBar,FAQList,LocationLinks,Photo,ServiceGrid,TrustSection} from "@/components/Site";
 import {JsonLd} from "@/components/JsonLd";
 import {pageSchema} from "@/lib/schema";
+import {homeFaq} from "@/data/pages";
 
-export default function Home(){return <><JsonLd data={pageSchema()}/><main id="conteudo"><section className="hero"><div className="hero-shade"/><Photo name="hero" className="hero-photo"/><div className="container hero-content"><span className="eyebrow light">SANTO AMARO • SÃO PAULO • GRANDE SP</span><h1>Desentupidora em Santo Amaro com atendimento 24 horas</h1><p>Entupimento em pia, vaso, ralo, esgoto ou caixa de gordura? Solicite uma visita gratuita e receba o orçamento antes do serviço.</p><CTAs location="Santo Amaro"/><div className="hero-badges"><span>✓ Atendimento 24h</span><span>✓ Visita gratuita</span><span>✓ Residencial e comercial</span></div></div></section><EmergencyBar/><section className="section"><div className="container"><div className="section-head"><span className="eyebrow">SERVIÇOS ESPECIALIZADOS</span><h2>Desentupimento para cada tipo de problema</h2><p>Explique os sinais observados. A avaliação do acesso e da tubulação define o método adequado.</p></div><ServiceGrid limit={6}/><div className="center"><Link className="text-link" href="/servicos/">Ver todos os serviços →</Link></div></div></section><section className="section split"><div className="container split-grid"><Photo name="sink"/><div><span className="eyebrow">COMO FUNCIONA</span><h2>Do primeiro contato ao orçamento</h2><ol className="steps"><li><b>Conte o problema</b><span>Informe endereço, ponto entupido e sinais como retorno ou mau cheiro.</span></li><li><b>Solicite a visita</b><span>A avaliação inicial é gratuita e a previsão é confirmada no contato.</span></li><li><b>Aprove o orçamento</b><span>O serviço só começa depois que você conhece e autoriza o valor.</span></li></ol><CTAs/></div></div></section><TrustSection/><section className="section"><div className="container"><div className="section-head"><span className="eyebrow">DOMINAÇÃO LOCAL</span><h2>Atendimento forte na Zona Sul e Grande São Paulo</h2><p>Santo Amaro é o território principal, com Santo André como segundo núcleo e páginas próprias para cada localidade.</p></div><h3>São Paulo: Zona Sul</h3><LocationLinks/><h3>Grande São Paulo</h3><LocationLinks group="metro"/><div className="center"><Link className="text-link" href="/areas-atendidas/">Ver bairros e todas as páginas territoriais →</Link></div></div></section><section className="section dark"><div className="container two-col"><div><span className="eyebrow light">SEGUNDO NÚCLEO</span><h2>Brava Desentupidora em Santo André</h2><p>Cobertura reforçada para residências, condomínios, restaurantes, comércios e indústrias nos 112 bairros oficiais do município.</p><div className="ctas"><Link className="button" href="/desentupidora-santo-andre/">Ver atendimento em Santo André</Link></div></div><Photo name="night"/></div></section><section className="section cta-section"><div className="container"><span className="eyebrow">ATENDIMENTO 24 HORAS</span><h2>Precisa de uma desentupidora agora?</h2><p>Envie o endereço e explique o que está acontecendo. Se preferir, ligue diretamente.</p><CTAs/></div></section></main></>}
+export default function Home(){
+  return <>
+    <JsonLd data={pageSchema()}/>
+    <main id="conteudo">
+      <section className="hero">
+        <div className="hero-shade"/>
+        <Photo name="hero" className="hero-photo"/>
+        <div className="container hero-content">
+          <span className="eyebrow light">SÃO PAULO • ATENDIMENTO 24 HORAS</span>
+          <h1>Desentupidora em São Paulo 24 horas</h1>
+          <p>Atendimento para pia, vaso sanitário, ralo, esgoto e caixa de gordura em residências, condomínios e empresas. Solicite uma visita gratuita e receba o orçamento antes do serviço.</p>
+          <CTAs location="São Paulo"/>
+          <div className="hero-badges"><span>✓ Atendimento 24h</span><span>✓ Visita gratuita</span><span>✓ Residencial e comercial</span></div>
+        </div>
+      </section>
+      <EmergencyBar/>
 
+      <section className="section"><div className="container">
+        <div className="section-head"><span className="eyebrow">SERVIÇOS DE DESENTUPIMENTO</span><h2>Soluções para diferentes tipos de entupimento</h2><p>Informe o que está acontecendo para que a equipe avalie o ponto afetado e indique o atendimento adequado.</p></div>
+        <ServiceGrid limit={6}/>
+        <div className="center"><Link className="text-link" href="/servicos/">Conheça todos os serviços</Link></div>
+      </div></section>
+
+      <section className="section split"><div className="container split-grid">
+        <Photo name="sink"/>
+        <div><span className="eyebrow">COMO SOLICITAR</span><h2>Atendimento simples e transparente</h2><ol className="steps"><li><b>Explique o problema</b><span>Informe o endereço, o ponto entupido e sinais como retorno de água ou mau cheiro.</span></li><li><b>Solicite a visita</b><span>A avaliação inicial é gratuita e a previsão é confirmada durante o contato.</span></li><li><b>Confira o orçamento</b><span>O serviço começa somente depois que você conhece e autoriza o valor.</span></li></ol><CTAs location="São Paulo"/></div>
+      </div></section>
+
+      <TrustSection/>
+
+      <section className="section"><div className="container">
+        <div className="section-head"><span className="eyebrow">ÁREAS ATENDIDAS</span><h2>Atendimento em São Paulo e Grande São Paulo</h2><p>Escolha sua região para consultar os serviços disponíveis e solicitar atendimento.</p></div>
+        <h3>Zona Sul de São Paulo</h3><LocationLinks/>
+        <h3>Cidades da Grande São Paulo</h3><LocationLinks group="metro"/>
+        <div className="center"><Link className="text-link" href="/areas-atendidas/">Consultar todas as áreas atendidas</Link></div>
+      </div></section>
+
+      <section className="section dark"><div className="container two-col">
+        <div><span className="eyebrow light">ATENDIMENTO 24 HORAS</span><h2>Desentupimento residencial, comercial e condominial</h2><p>Atendimento para casas, apartamentos, condomínios, restaurantes, lojas, escritórios, galpões e outros estabelecimentos em São Paulo.</p><div className="ctas"><Link className="button" href="/servicos/">Conhecer os serviços</Link></div></div>
+        <Photo name="night"/>
+      </div></section>
+
+      <section className="section"><div className="container faq-home"><div className="section-head"><span className="eyebrow">DÚVIDAS FREQUENTES</span><h2>Perguntas sobre desentupimento em São Paulo</h2><p>Veja respostas sobre preço, atendimento, visita e regiões atendidas.</p></div><FAQList items={homeFaq}/></div></section>
+
+      <section className="section cta-section"><div className="container"><span className="eyebrow">FALE COM A BRAVA</span><h2>Precisa de uma desentupidora agora?</h2><p>Envie o endereço e explique o que está acontecendo. Se preferir, ligue diretamente.</p><CTAs location="São Paulo"/></div></section>
+    </main>
+  </>;
+}

@@ -6,8 +6,8 @@ import {absoluteUrl,site} from "@/lib/site";
 
 export const metadata:Metadata={
   metadataBase:new URL(absoluteUrl("/")),
-  title:{default:"Desentupidora em Santo Amaro 24h | Brava",template:"%s"},
-  description:"Brava Desentupidora SP: atendimento 24 horas, visita gratuita e serviços para pia, vaso, ralo, esgoto e caixa de gordura.",
+  title:{default:"Desentupidora em São Paulo 24h | Brava",template:"%s"},
+  description:"Desentupidora em São Paulo com atendimento 24 horas para pia, vaso, ralo, esgoto e caixa de gordura. Visita gratuita e orçamento antes do serviço.",
   alternates:{canonical:absoluteUrl("/")},
   robots:{index:site.indexing,follow:true},
   openGraph:{siteName:site.name,locale:"pt_BR",type:"website"},

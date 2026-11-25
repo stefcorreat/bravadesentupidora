@@ -12,7 +12,7 @@ Site institucional e de SEO local em Next.js, preparado para publicação na Ver
 - Páginas de serviços, intenções de busca, artigos e áreas atendidas.
 - Sitemap, robots, canonical, Open Graph e JSON-LD.
 - CTAs de WhatsApp e ligação.
-- Imagens gratuitas com créditos e páginas de origem registradas.
+- Imagens profissionais distribuídas pelas páginas do site.
 
 ## Configuração antes da publicação
 

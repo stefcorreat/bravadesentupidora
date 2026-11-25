@@ -16,6 +16,9 @@ for(const path of urls){
   if(!h1)errors.push(`${path}: sem H1`); else if(h1s.has(h1))errors.push(`${path}: H1 duplicado com ${h1s.get(h1)}`); else h1s.set(h1,path);
   if(!canonical||new URL(canonical).pathname!==path||new URL(canonical).origin!==expectedCanonicalOrigin)errors.push(`${path}: canonical incorreto`);
   if(!html.includes('application/ld+json'))errors.push(`${path}: sem JSON-LD`);
+  if(!html.includes('FAQPage'))errors.push(`${path}: sem schema FAQPage`);
+  if(!html.includes('Perguntas frequentes')&&!html.includes('Perguntas sobre desentupimento'))errors.push(`${path}: sem FAQ visível`);
+  if(html.toLowerCase().includes('créditos das imagens')||html.includes('/creditos-de-imagens/'))errors.push(`${path}: referência pública a créditos de imagens`);
   if(!html.includes('class="budget-form"'))errors.push(`${path}: sem formulário de orçamento`);
 }
 if(urls.length<200)errors.push(`Sitemap insuficiente: ${urls.length} URLs; mínimo esperado 200`);
