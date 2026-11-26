@@ -1,6 +1,7 @@
 import type {Metadata,Viewport} from "next";
 import "./globals.css";
 import {absoluteUrl,site} from "@/lib/site";
+import {SiteTracking,TagManagerFallback} from "@/components/SiteTracking";
 
 export const metadata:Metadata={
   metadataBase:new URL(absoluteUrl("/")),
@@ -17,8 +18,10 @@ export default function RootLayout({children}:{children:React.ReactNode}){
   return (
     <html lang="pt-BR">
       <body>
+        <TagManagerFallback/>
         <a className="skip" href="#conteudo">Ir para o conteúdo</a>
         {children}
+        <SiteTracking/>
       </body>
     </html>
   );
