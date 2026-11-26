@@ -91,5 +91,15 @@ export function MarketPriceTable(){const rows=[
 
 export function Related({paths=[]}:{paths?:string[]}){const pages=paths.map(path=>allPages.find(p=>p.path===path)).filter(Boolean) as PageData[];if(!pages.length)return null;return <aside className="related"><h2>Veja também</h2><div>{pages.slice(0,12).map(p=><Link href={p.path} key={p.path}>{p.h1}</Link>)}</div></aside>}
 
-export function EmergencyBar({message}:{message:string}){return <div className="emergency"><div><strong>Problema urgente?</strong><span>Atendimento 24 horas em São Paulo e Grande SP</span></div><CTAs compact message={message}/></div>}
+export function EmergencyBar({message}:{message:string}){
+  return (
+    <div className="emergency">
+      <div>
+        <strong>Chegamos em até 30 minutos</strong>
+        <span>Após a confirmação do atendimento de urgência para seu endereço.</span>
+      </div>
+      <CTAs compact message={message}/>
+    </div>
+  );
+}
 

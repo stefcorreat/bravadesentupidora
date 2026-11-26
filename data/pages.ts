@@ -291,7 +291,7 @@ export const homeFaq:FAQ[] = [
   {q:"A visita é gratuita?",a:"Sim. A avaliação inicial é gratuita e o serviço só começa depois da apresentação e aprovação do orçamento."},
   {q:"Preciso pagar se o entupimento não for resolvido?",a:"Não. Se o técnico não conseguir desentupir o ponto avaliado, você não paga pelo atendimento."},
   {q:"O serviço de desentupimento tem garantia?",a:"Sim. O desentupimento realizado tem garantia. Consulte com a equipe o prazo e o que ela cobre no seu caso."},
-  {q:"Em quanto tempo a equipe chega?",a:"A previsão depende do seu endereço, do horário e da disponibilidade da equipe. Informe seu bairro pelo WhatsApp ou telefone para confirmar."},
+  {q:"Em quanto tempo a equipe chega?",a:"Em até 30 minutos após a confirmação do atendimento de urgência para seu endereço. Informe sua localização pelo WhatsApp ou telefone para confirmar a disponibilidade."},
   {q:"Como funciona o orçamento pelo WhatsApp?",a:"Conte o que entupiu, onde você está e se é urgente. A equipe orienta você sobre a visita. Depois da avaliação no local, você recebe o valor para decidir se quer seguir com o serviço."},
   {q:"O atendimento é no meu endereço?",a:"Sim. A equipe vai ao endereço informado, após confirmar a cobertura e combinar a visita com você."},
   {q:"Como posso pagar pelo serviço?",a:"Confirme com a equipe as formas de pagamento disponíveis antes de aprovar o orçamento."},
