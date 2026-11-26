@@ -5,6 +5,11 @@ const generalServicePhoto: SiteImage = {
   alt: "Atendimento de desentupimento"
 };
 
+const teamPhoto: SiteImage = {
+  src: "https://i.ibb.co/svFJ5j31/BA7-E7-ECC-15-BD-4-A09-8-C38-F6-DDFF78-F076.png",
+  alt: "Equipe da Brava Desentupidora"
+};
+
 const servicePhotos = {
   toiletService: {
     src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCS17s2dU5IicF_l92AsKR6TEZXgR7mUW2i3CjVKRGN0os6nj_Qmscu08&s=10",
@@ -31,9 +36,9 @@ const servicePhotos = {
 export const images = {
   ...servicePhotos,
   hero: generalServicePhoto,
-  sink: servicePhotos.sinkService,
+  sink: teamPhoto,
   pipe: generalServicePhoto,
   drain: servicePhotos.drainService,
   night: generalServicePhoto,
-  kitchen: servicePhotos.sinkService
+  kitchen: teamPhoto
 } satisfies Record<string, SiteImage>;

@@ -256,8 +256,15 @@ const articles:{slug:string;h1:string;description:string;sections:{heading:strin
   ]}
 ];
 
-export const articlePages:PageData[] = articles.map((article,i)=>({
-  path:`/blog/${article.slug}/`,slug:`blog/${article.slug}`,kind:"article",title:`${article.h1} | Guia Brava`,description:article.description,h1:article.h1,eyebrow:"GUIA BRAVA",intro:article.description,image:i%2?"drain":"sink",
+const articleImages: Partial<Record<string, keyof typeof images>> = {
+  "como-evitar-entupimento-de-pia": "sinkService",
+  "sinais-de-esgoto-entupido": "sewerService",
+  "o-que-fazer-quando-o-vaso-entupir": "toiletService",
+  "caixa-de-gordura-entupida": "greaseTrapService"
+};
+
+export const articlePages:PageData[] = articles.map(article=>({
+  path:`/blog/${article.slug}/`,slug:`blog/${article.slug}`,kind:"article",title:`${article.h1} | Guia Brava`,description:article.description,h1:article.h1,eyebrow:"GUIA BRAVA",intro:article.description,image:articleImages[article.slug]??"pipe",
   sections:article.sections,faq:article.faq,related:["/blog/","/servicos/","/orcamento-de-desentupimento/"]
 }));
 
