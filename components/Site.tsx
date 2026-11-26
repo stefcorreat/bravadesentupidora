@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {images} from "@/data/images";
 import {allPages,allLocationPages,featuredMetroLocations,locationPages,priorityLocations,santoAndreNeighborhoodPages,saoBernardoNeighborhoodPages,servicePages,type FAQ,type PageData} from "@/data/pages";
 import {site,whatsappUrl} from "@/lib/site";
@@ -6,7 +7,7 @@ import {site,whatsappUrl} from "@/lib/site";
 export function Logo(){
   return (
     <Link className="logo" href="/" aria-label="Brava Desentupidora - início">
-      <img src="https://i.postimg.cc/TPXvKMJ2/5CB6AEBD-1478-45A2-9965-B00450E8E49A.png" alt="Brava Desentupidora 24h" width={220} height={70}/>
+      <Image src="https://i.postimg.cc/TPXvKMJ2/5CB6AEBD-1478-45A2-9965-B00450E8E49A.png" alt="Brava Desentupidora 24h" width={220} height={73} sizes="(max-width: 460px) 48vw, 220px" loading="eager"/>
     </Link>
   );
 }
@@ -46,14 +47,20 @@ export function CTAs({message,compact=false}:{message:string;compact?:boolean}){
 export function Photo({name,className=""}:{name:keyof typeof images;className?:string}){
   const photo=images[name];
   const isHero=className==="hero-photo";
-  return <figure className={`photo ${className}`}><img src={photo.src} alt={photo.alt} loading={isHero||name==="hero"?"eager":"lazy"} fetchPriority={isHero?"high":undefined}/></figure>;
+  return <figure className={`photo ${className}`}>
+    {photo===images.sink
+      ? <Image src={photo.src} alt={photo.alt} width={640} height={632} sizes="(max-width: 720px) 95vw, 560px"/>
+      : <img src={photo.src} alt={photo.alt} loading={isHero||name==="hero"?"eager":"lazy"} fetchPriority={isHero?"high":undefined}/>}
+  </figure>;
 }
 
 export function ServiceGrid({limit}:{limit?:number}){
   const items=limit?servicePages.slice(0,limit):servicePages;
   return <div className="card-grid">{items.map(page=>(
     <Link className="service-card" href={page.path} key={page.path}>
-      <img src={images[page.image].src} alt={images[page.image].alt} loading="lazy"/>
+      {images[page.image]===images.sink
+        ? <Image src={images[page.image].src} alt={images[page.image].alt} width={640} height={632} sizes="(max-width: 720px) 95vw, (max-width: 1000px) 45vw, 380px"/>
+        : <img src={images[page.image].src} alt={images[page.image].alt} loading="lazy"/>}
       <div>
         <h3>{page.h1.replace(" em São Paulo","")}</h3>
         <p>{page.serviceSummary}</p>
