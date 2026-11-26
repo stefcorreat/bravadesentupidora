@@ -106,11 +106,11 @@ export const saoBernardoNeighborhoodPages:PageData[] = saoBernardoNeighborhoods.
 export const allLocationPages:PageData[] = [...locationPages,...santoAndreNeighborhoodPages,...saoBernardoNeighborhoodPages];
 
 const serviceSeed = [
-  ["desentupimento-de-pia","Desentupimento de pia","pia de cozinha ou banheiro","sink","A água fica parada na cuba ou demora a descer? A equipe verifica o sifão e a tubulação para localizar o bloqueio."],
-  ["desentupimento-de-vaso-sanitario","Desentupimento de vaso sanitário","vaso sanitário com escoamento lento, transbordamento ou retorno","kitchen","A água sobe quando você dá descarga ou fica parada no vaso? Avise a equipe se houver risco de transbordamento."],
-  ["desentupimento-de-ralo","Desentupimento de ralo","ralos de banheiro, quintal e área de serviço","drain","O ralo do banheiro, do quintal ou da área de serviço deixou de escoar? Informe se há mau cheiro ou água voltando."],
-  ["desentupimento-de-esgoto","Desentupimento de esgoto","rede de esgoto com retorno, mau cheiro ou extravasamento","night","Esgoto voltando pelo ralo ou vários pontos entupidos ao mesmo tempo? A equipe avalia a tubulação no local."],
-  ["desentupimento-de-caixa-de-gordura","Desentupimento de caixa de gordura","caixa de gordura com acúmulo, retorno ou transbordamento","pipe","Mau cheiro na cozinha, pia demorando a escoar ou caixa transbordando? Conte quais sinais apareceram."],
+  ["desentupimento-de-pia","Desentupimento de pia","pia de cozinha ou banheiro","sinkService","A água fica parada na cuba ou demora a descer? A equipe verifica o sifão e a tubulação para localizar o bloqueio."],
+  ["desentupimento-de-vaso-sanitario","Desentupimento de vaso sanitário","vaso sanitário com escoamento lento, transbordamento ou retorno","toiletService","A água sobe quando você dá descarga ou fica parada no vaso? Avise a equipe se houver risco de transbordamento."],
+  ["desentupimento-de-ralo","Desentupimento de ralo","ralos de banheiro, quintal e área de serviço","drainService","O ralo do banheiro, do quintal ou da área de serviço deixou de escoar? Informe se há mau cheiro ou água voltando."],
+  ["desentupimento-de-esgoto","Desentupimento de esgoto","rede de esgoto com retorno, mau cheiro ou extravasamento","sewerService","Esgoto voltando pelo ralo ou vários pontos entupidos ao mesmo tempo? A equipe avalia a tubulação no local."],
+  ["desentupimento-de-caixa-de-gordura","Desentupimento de caixa de gordura","caixa de gordura com acúmulo, retorno ou transbordamento","greaseTrapService","Mau cheiro na cozinha, pia demorando a escoar ou caixa transbordando? Conte quais sinais apareceram."],
   ["desentupimento-residencial","Desentupimento residencial","casas e apartamentos","kitchen","Atendimento em casas e apartamentos. Diga qual ponto entupiu e se o problema também aparece em outros cômodos."],
   ["desentupimento-comercial-industrial","Desentupimento comercial e industrial","comércios, restaurantes, condomínios, galpões e indústrias","night","Atendimento em lojas, restaurantes, escritórios e outros estabelecimentos. Informe se o entupimento interrompeu a operação."]
 ] as const;
@@ -149,7 +149,7 @@ export const serviceAreaPages:PageData[] = serviceSeed.flatMap(([serviceSlug,ser
     h1:`${serviceName} em ${location}`,
     eyebrow:"SERVIÇO LOCAL 24 HORAS",
     intro:`${serviceSummary} Fale com a Brava para pedir uma visita gratuita em ${location}.`,
-    image:(serviceIndex+locationIndex)%3===0?image:(serviceIndex+locationIndex)%3===1?"pipe":"drain",
+    image:image.endsWith("Service")?image:(serviceIndex+locationIndex)%3===0?image:(serviceIndex+locationIndex)%3===1?"pipe":"drain",
     sections:[
       ...serviceGuides[serviceSlug].sections,
       ...(serviceSlug==="desentupimento-de-vaso-sanitario" && locationSlug==="santo-amaro" ? [santoAmaroToiletSection] : []),
