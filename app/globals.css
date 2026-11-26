@@ -72,39 +72,14 @@ gap:30px}
 .logo{
 display:inline-flex;
 align-items:center;
-gap:10px;
+flex-shrink:0;
 margin-right:auto}
-.logo-mark{
-width:44px;
-height:44px;
-border-radius:12px;
-background:var(--blue);
-color:#fff;
-display:grid;
-place-items:center;
-font-size:25px;
-font-weight:900;
-position:relative}
-.logo-mark:after{
-content:"";
-width:11px;
-height:11px;
-background:var(--orange);
-border-radius:50%;
-position:absolute;
-right:-3px;
-top:-3px}
-.logo strong{
-display:block;
-color:var(--blue);
-font-size:24px;
-line-height:1;
-letter-spacing:.06em}
-.logo small{
-display:block;
-font-size:9px;
-letter-spacing:.2em;
-margin-top:5px}
+.logo img{
+width:clamp(150px, 48vw, 220px);
+height:auto;
+aspect-ratio:22/7;
+object-fit:cover;
+object-position:center}
 .desktop-nav{
 display:flex;
 gap:25px;
@@ -552,10 +527,10 @@ padding:65px 0 20px}
 display:grid;
 grid-template-columns:1.4fr 1fr 1fr;
 gap:60px}
-.footer .logo strong{
-color:#fff}
-.footer .logo small{
-color:#d4e1e9}
+.footer .logo{
+background:#fff;
+border-radius:10px;
+padding:4px 10px}
 .footer p{
 color:#fff;
 max-width:440px}
@@ -628,11 +603,6 @@ gap:12px}
 display:none}
 .nav{
 min-height:68px}
-.logo strong{
-font-size:20px}
-.logo-mark{
-width:39px;
-height:39px}
 .hero{
 min-height:0}
 .hero-shade{
@@ -914,9 +884,6 @@ color:var(--orange)}
 .container{width:min(100% - 22px,1180px)}
 .topline{font-size:12px}
 .top-inner{gap:8px}
-.logo{gap:8px}
-.logo strong{font-size:18px}
-.logo small{font-size:8px}
 .mobile-menu>div{width:min(230px,calc(100vw - 24px))}
 .section-head h2,.split h2,.dark h2,.cta-section h2{font-size:31px}
 .emergency{padding-inline:18px}

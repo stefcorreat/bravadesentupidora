@@ -3,7 +3,13 @@ import {images} from "@/data/images";
 import {allPages,allLocationPages,featuredMetroLocations,priorityLocations,santoAndreNeighborhoodPages,saoBernardoNeighborhoodPages,servicePages,type FAQ,type PageData} from "@/data/pages";
 import {site,whatsappUrl} from "@/lib/site";
 
-export function Logo(){return <Link className="logo" href="/" aria-label="Brava Desentupidora - início"><span className="logo-mark">B</span><span><strong>BRAVA</strong><small>DESENTUPIDORA SP</small></span></Link>}
+export function Logo(){
+  return (
+    <Link className="logo" href="/" aria-label="Brava Desentupidora - início">
+      <img src="https://i.postimg.cc/TPXvKMJ2/5CB6AEBD-1478-45A2-9965-B00450E8E49A.png" alt="Brava Desentupidora 24h" width={220} height={70}/>
+    </Link>
+  );
+}
 
 export function Header({message}:{message:string}){return <header className="header"><div className="topline"><div className="container top-inner"><span>Atendimento 24 horas</span><span>Visita gratuita</span><a href={`tel:${site.phone}`}>Ligue: {site.phoneDisplay}</a></div></div><div className="container nav"><Logo/><nav className="desktop-nav" aria-label="Principal"><Link href="/servicos/">Serviços</Link><Link href="/areas-atendidas/">Áreas atendidas</Link><Link href="/blog/">Guia</Link><Link href="/sobre/">Sobre</Link></nav><div className="nav-actions"><a className="call-link" href={`tel:${site.phone}`}>Ligar agora</a><a className="button small" href={whatsappUrl(message)} target="_blank" rel="noopener noreferrer">WhatsApp</a></div><details className="mobile-menu"><summary>Menu</summary><div><Link href="/servicos/">Serviços</Link><Link href="/areas-atendidas/">Áreas atendidas</Link><Link href="/blog/">Guia</Link><Link href="/sobre/">Sobre</Link><a href={`tel:${site.phone}`}>Ligar agora</a><a href={whatsappUrl(message)} target="_blank" rel="noopener noreferrer">WhatsApp</a></div></details></div></header>}
 
