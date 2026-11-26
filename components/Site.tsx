@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {images} from "@/data/images";
-import {allPages,allLocationPages,featuredMetroLocations,priorityLocations,santoAndreNeighborhoodPages,saoBernardoNeighborhoodPages,servicePages,type FAQ,type PageData} from "@/data/pages";
+import {allPages,allLocationPages,featuredMetroLocations,locationPages,priorityLocations,santoAndreNeighborhoodPages,saoBernardoNeighborhoodPages,servicePages,type FAQ,type PageData} from "@/data/pages";
 import {site,whatsappUrl} from "@/lib/site";
 
 export function Logo(){
@@ -13,7 +13,33 @@ export function Logo(){
 
 export function Header({message}:{message:string}){return <header className="header"><div className="topline"><div className="container top-inner"><span>Atendimento 24 horas</span><span>Visita gratuita</span><a href={`tel:${site.phone}`}>Ligue: {site.phoneDisplay}</a></div></div><div className="container nav"><Logo/><nav className="desktop-nav" aria-label="Principal"><Link href="/servicos/">Serviços</Link><Link href="/areas-atendidas/">Áreas atendidas</Link><Link href="/blog/">Guia</Link><Link href="/sobre/">Sobre</Link></nav><div className="nav-actions"><a className="call-link" href={`tel:${site.phone}`}>Ligar agora</a><a className="button small" href={whatsappUrl(message)} target="_blank" rel="noopener noreferrer">WhatsApp</a></div><details className="mobile-menu"><summary>Menu</summary><div><Link href="/servicos/">Serviços</Link><Link href="/areas-atendidas/">Áreas atendidas</Link><Link href="/blog/">Guia</Link><Link href="/sobre/">Sobre</Link><a href={`tel:${site.phone}`}>Ligar agora</a><a href={whatsappUrl(message)} target="_blank" rel="noopener noreferrer">WhatsApp</a></div></details></div></header>}
 
-export function Footer({message}:{message:string}){return <footer className="footer"><div className="container footer-grid"><div><Logo/><p>Desentupimento 24 horas em São Paulo e Grande SP. Visita gratuita e orçamento antes da execução.</p></div><div><h2>Atendimento</h2><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a><a href={whatsappUrl(message)} target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a><Link href="/contato/">Informações de contato</Link></div><div><h2>Informações</h2><Link href="/areas-atendidas/">Áreas atendidas</Link><Link href="/politica-de-privacidade/">Política de privacidade</Link><Link href="/termos-de-uso/">Termos de uso</Link></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} Brava Desentupidora SP</span><span>Site desenvolvido por <a href="https://midiaemarketingdigital.com.br/" target="_blank" rel="noopener noreferrer">Mídia &amp; Marketing Digital</a></span></div></footer>}
+const metroPaths = new Set(featuredMetroLocations.map(page => page.path));
+const southZoneLocations = locationPages.filter(page => !metroPaths.has(page.path));
+
+function FooterLocations(){
+  return (
+    <nav className="container footer-areas" aria-labelledby="footer-areas-title">
+      <h2 id="footer-areas-title">Áreas atendidas pela Brava</h2>
+      <div className="footer-area-grid">
+        <div>
+          <h3><Link href="/desentupidora-em-sao-paulo/">São Paulo capital</Link></h3>
+          <ul>{southZoneLocations.map(page => (
+            <li key={page.path}><Link href={page.path}>{page.location}</Link></li>
+          ))}</ul>
+        </div>
+        <div>
+          <h3>Grande São Paulo e ABC</h3>
+          <ul>{featuredMetroLocations.map(page => (
+            <li key={page.path}><Link href={page.path}>{page.location}</Link></li>
+          ))}</ul>
+        </div>
+      </div>
+      <Link className="footer-area-index" href="/areas-atendidas/">Ver todas as áreas atendidas</Link>
+    </nav>
+  );
+}
+
+export function Footer({message}:{message:string}){return <footer className="footer"><div className="container footer-grid"><div><Logo/><p>Desentupimento 24 horas em São Paulo e Grande SP. Visita gratuita e orçamento antes da execução.</p></div><div><h2>Atendimento</h2><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a><a href={whatsappUrl(message)} target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a><Link href="/contato/">Informações de contato</Link></div><div><h2>Informações</h2><Link href="/areas-atendidas/">Áreas atendidas</Link><Link href="/politica-de-privacidade/">Política de privacidade</Link><Link href="/termos-de-uso/">Termos de uso</Link></div></div><FooterLocations/><div className="container footer-bottom"><span>© {new Date().getFullYear()} Brava Desentupidora SP</span><span>Site desenvolvido por <a href="https://midiaemarketingdigital.com.br/" target="_blank" rel="noopener noreferrer">Mídia &amp; Marketing Digital</a></span></div></footer>}
 
 export function CTAs({message,compact=false}:{message:string;compact?:boolean}){return <div className={`ctas ${compact?"compact":""}`}><a className="button" href={whatsappUrl(message)} target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a><a className="button secondary" href={`tel:${site.phone}`}>Ligar {site.phoneDisplay}</a></div>}
 
