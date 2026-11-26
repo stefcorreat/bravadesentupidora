@@ -792,7 +792,7 @@ width:100%;
 min-height:52px;
 border:0;
 border-radius:999px;
-background:#119447;
+background:#087a37;
 color:#fff;
 font-size:15px;
 font-weight:900;
@@ -802,7 +802,7 @@ align-items:center;
 justify-content:center;
 gap:8px}
 .whatsapp-submit:hover{
-background:#087a37}
+background:#06662e}
 .whatsapp-submit svg{
 width:19px;
 height:19px;

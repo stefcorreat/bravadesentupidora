@@ -43,7 +43,11 @@ export function Footer({message}:{message:string}){return <footer className="foo
 
 export function CTAs({message,compact=false}:{message:string;compact?:boolean}){return <div className={`ctas ${compact?"compact":""}`}><a className="button" href={whatsappUrl(message)} target="_blank" rel="noopener noreferrer">Falar no WhatsApp</a><a className="button secondary" href={`tel:${site.phone}`}>Ligar {site.phoneDisplay}</a></div>}
 
-export function Photo({name,className=""}:{name:keyof typeof images;className?:string}){const photo=images[name];return <figure className={`photo ${className}`}><img src={photo.src} alt={photo.alt} loading={name==="hero"?"eager":"lazy"}/></figure>}
+export function Photo({name,className=""}:{name:keyof typeof images;className?:string}){
+  const photo=images[name];
+  const isHero=className==="hero-photo";
+  return <figure className={`photo ${className}`}><img src={photo.src} alt={photo.alt} loading={isHero||name==="hero"?"eager":"lazy"} fetchPriority={isHero?"high":undefined}/></figure>;
+}
 
 export function ServiceGrid({limit}:{limit?:number}){
   const items=limit?servicePages.slice(0,limit):servicePages;
